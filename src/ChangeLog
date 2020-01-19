@@ -1,0 +1,532 @@
+commit 1d4e1a9c40f57e96a3f54f7df53a2f8ad28f6aa0
+Author: James Antill <james@and.org>
+Date:   Mon Sep 30 11:36:16 2013 -0400
+
+    Setup conditional pkgs. for lang commands. BZ 1013221.
+
+ langpacks.py | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
+
+commit 53561df1e74fc37d3481d68b9d5d6a30e7ce76b8
+Author: James Antill <james@and.org>
+Date:   Tue Sep 24 15:02:33 2013 -0400
+
+    Don't download groups and setup conditional_pkgs unless we need to.
+
+ langpacks.py | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+commit e2ddcf108cff8594b46f74d168bbd0cafb6bd380
+Author: James Antill <james@and.org>
+Date:   Tue Sep 24 15:02:07 2013 -0400
+
+    Don't load langtable unless we need it, it takes ages to load.
+
+ langpacks.py | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
+
+commit 7f75694ffffadfa5b67df62b903ba311eb4baa7d
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Sep 12 09:59:51 2013 +0530
+
+    update Changelog
+
+ ChangeLog | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+commit da685e17eb754e711c1e8b063a6535247c1e09a8
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Sep 12 09:59:17 2013 +0530
+
+    bump the release to 0.4.1
+
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 4e4ae48f32f554bb76b75b74d9582e4f3700f6f4
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Sep 12 09:56:04 2013 +0530
+
+    Add few more package filters to skip_pkg_list
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 187122c3d08aeaef357ffcf4b94e5319ecfe4cbf
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Sep 9 18:55:58 2013 +0530
+
+    Prepare for 0.4.0 release
+
+ ChangeLog | 29 +++++++++++++++++++++++++++++
+ Makefile  |  2 +-
+ setup.py  |  2 +-
+ 3 files changed, 31 insertions(+), 2 deletions(-)
+
+commit e10092c980574730896d488ec11b46ca0d8a6e99
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Sep 9 18:49:14 2013 +0530
+
+    Added man page for yum-langpacks
+
+ yum-langpacks.8 | 62 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 62 insertions(+)
+
+commit dac403c1d28042fb64c5160b68237cc823913a87
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Sep 9 18:31:48 2013 +0530
+
+    use langtable module for converting language code to its name and vice versa. Enhanced langavailable command.
+
+ langpacks.py | 100 ++++++++++++++++++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 82 insertions(+), 18 deletions(-)
+
+commit 04252672a05abeebd0a778de818c86c291c097a6
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Jul 2 21:19:12 2013 +0530
+
+    bump to 0.3.4
+
+ ChangeLog | 20 ++++++++++++++++++++
+ README    |  3 +++
+ setup.py  |  2 +-
+ 3 files changed, 24 insertions(+), 1 deletion(-)
+
+commit d7281feaf517e12d145f0d6071b5d38f5fa02268
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Jul 2 21:06:17 2013 +0530
+
+    Add langavailable command
+
+ langpacks.py | 68 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 65 insertions(+), 3 deletions(-)
+
+commit 50b28f835eacbec3ca05e51c7444337c3a2bb7d1
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Jul 2 20:31:08 2013 +0530
+
+    bump to 0.3.3
+
+ ChangeLog | 104 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----
+ README    |   3 ++
+ setup.py  |   2 +-
+ 3 files changed, 101 insertions(+), 8 deletions(-)
+
+commit 210887356e23fec4daf52a3e303afc59905cab18
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Fri Jun 28 15:07:35 2013 +0530
+
+    Add langinfo command
+
+ langpacks.py | 64 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 64 insertions(+)
+
+commit 759d5750cfd99c2a44bf3a59fa5603bdf4d981ec
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Fri Mar 29 16:08:16 2013 +0900
+
+    Makefile: add a few admin targets
+
+ Makefile | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit facab149b9934d72452af83f51e5139e412718d1
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Fri Mar 29 15:29:00 2013 +0900
+
+    bump version to 0.3.1
+
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e160bb8400319479643ba782dc001dd5a55df153
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Fri Mar 29 15:27:49 2013 +0900
+
+    correct the author
+
+ setup.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 553615e1805bd3c2923fb44f39ee0fad8f9b3c0e
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Tue Sep 25 08:48:49 2012 -0400
+
+    Use a default value for the base class. (#858175)
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 64e6e72e04a18b0edd23bf7c68fdf2be91557875
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Tue Aug 14 10:56:33 2012 -0400
+
+    Switch back to TYPE_CORE, fix register check.
+
+ langpacks.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 3e09e177ec9c170fb6ca14a0e725b8390e22bc77
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Tue Aug 14 10:48:58 2012 -0400
+
+    Check to make sure we're root before langinstall/langremove.
+
+ langpacks.py | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 460f50548587f692499daae9e38e5c17c85fa078
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Mon Aug 13 15:47:31 2012 -0400
+
+    Fix plugin type to work correctly with registerCommand, and avoid similar failures in the future. (#847502)
+
+ langpacks.py | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+commit 59965b7104d76fb032a57650ec0d1e126ece88f1
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Mon Aug 13 15:47:15 2012 -0400
+
+    Fix traceback on groupinstall of a group with langonly set. (#840885)
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 4df7bd968437399ff88c4f07c117efd7fc471cbb
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Wed Aug 8 15:17:30 2012 -0400
+
+    Update Changelog.
+
+ ChangeLog | 134 ++++++++++++++++++++++++++++++++++++++++----------------------
+ 1 file changed, 87 insertions(+), 47 deletions(-)
+
+commit 65b1afcd4e2d8b56c05a5064e91285e2a7839d4c
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Wed Aug 8 15:17:16 2012 -0400
+
+    Update README and version.
+
+ Makefile     |  1 -
+ README       | 42 +++++++++++++++++++++++++++++-------------
+ langpacks.py |  2 +-
+ setup.py     |  2 +-
+ 4 files changed, 31 insertions(+), 16 deletions(-)
+
+commit 08dc388bae60c64199314d66e7a88f04fe3607ae
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Wed Aug 8 15:03:30 2012 -0400
+
+    Support persistent storage of installed langpacks.
+
+ langpacks.conf |   7 +++-
+ langpacks.py   | 111 +++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ 2 files changed, 115 insertions(+), 3 deletions(-)
+
+commit 7dbedc8d8306959cd286afe47050fab5145ac5fb
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Wed Aug 8 00:35:30 2012 -0400
+
+    Add langinstall/langremove commands.
+
+ langpacks.py | 97 ++++++++++++++++++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 88 insertions(+), 9 deletions(-)
+
+commit 05bd561ef68d2f5f32604e3ba0e82d2e2bae5c67
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Thu Jun 21 14:15:09 2012 -0400
+
+    update changelog
+
+ ChangeLog | 120 +++++++++++++++++++++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 100 insertions(+), 20 deletions(-)
+
+commit cd45df6f004d05fe1c06ac0c9138c13c648eac93
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Thu Jun 21 14:13:58 2012 -0400
+
+    Bump release.
+
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b18f0ae8b345e705e688eb67f0eb26aeaa58f9ce
+Author: Zdeněk Pavlas <zpavlas@redhat.com>
+Date:   Tue Jun 19 15:53:24 2012 +0200
+
+    catch XML parse errors. BZ 825811, 830739.
+    
+    Print XML errors to stderr instead of terminating.
+    Based on yum.update_md.safe_iterparse().
+
+ langpacks.py | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+commit 0e485f0000fb9f9c6b6fe364fff54678a670027b
+Author: Zdeněk Pavlas <zpavlas@redhat.com>
+Date:   Thu Dec 15 11:53:28 2011 +0100
+
+    Use the already decompressed comps file. BZ 758574.
+    
+    Instead of decompressing the file every time check
+    if decompressed version exists.  It's faster and
+    avoids possible EPERM on write with --cacheonly.
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 2321a64e5e54a7ba9bf4b44891b688c715e7416b
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Wed Oct 26 11:06:52 2011 -0400
+
+    Don't crash on the no-groups case. (#749108)
+
+ langpacks.py | 2 ++
+ setup.py     | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+commit 77aa7f7694c540ca61e9b3d344e40d0bbc6bb71e
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Mon Oct 24 17:12:35 2011 -0400
+
+    assorted makefile frippery
+
+ Makefile | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit ed3e3d3f4eeb7542446d7e189af4bafffaecdaa6
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Mon Oct 24 17:11:48 2011 -0400
+
+    Bump release
+
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 0144df4378a81ff99504a167da83463172d7c778
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Mon Oct 24 17:11:19 2011 -0400
+
+    Grab whatever the best group metadata is; handle it if it's compressed (#748186)
+
+ langpacks.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 2fdb94c4117564992147d83dfe49038f648be23e
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Mon Mar 14 14:34:24 2011 -0400
+
+    Update.
+
+ ChangeLog | 47 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
+
+commit 18af45217fcb016865daeb3d2d559f204f1d9b8b
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Mon Mar 14 14:33:17 2011 -0400
+
+    Don't match packages being updated as actual removals. (#684817)
+
+ langpacks.py | 2 +-
+ setup.py     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 09894b68592ca9af22b5b3225a85aad1b0152866
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Fri Mar 11 12:18:04 2011 -0500
+
+    0.2.1
+
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 851f732931b1bb0a9cf3269c0f6407a0cb081378
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Fri Mar 11 12:17:33 2011 -0500
+
+    Fix matching/searching to operate on provides, not just names. (#681747)
+
+ langpacks.py | 18 +++++++++++++-----
+ 1 file changed, 13 insertions(+), 5 deletions(-)
+
+commit 710cacf87dde60628f1a8d551816eb2986ee1114
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Tue Mar 8 16:25:47 2011 -0500
+
+    Bump version.
+
+ README   | 7 ++-----
+ setup.py | 2 +-
+ 2 files changed, 3 insertions(+), 6 deletions(-)
+
+commit 3c24effad425687791e817b697f6b74891919bae
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Tue Mar 8 16:20:29 2011 -0500
+
+    Add full changelog.
+
+ ChangeLog | 161 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 158 insertions(+), 3 deletions(-)
+
+commit 6dca459a7635920e859304d08956608aa1295bb5
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Tue Mar 8 16:18:35 2011 -0500
+
+    Some improvements/tweaks via yum maintainers.
+
+ langpacks.py | 49 ++++++++++++++++++++++++++++++++-----------------
+ 1 file changed, 32 insertions(+), 17 deletions(-)
+
+commit f49c97b8ab92812050fcd248c786e3b3fab07748
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Tue Feb 1 16:59:09 2011 -0500
+
+    Rearrange things to make it go much faster.
+
+ langpacks.py | 93 +++++++++++++++++++++++++++++++++---------------------------
+ 1 file changed, 51 insertions(+), 42 deletions(-)
+
+commit a85ea8c8f0b41e40cea246079cf515a724747142
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Tue Feb 1 16:29:17 2011 -0500
+
+    Here's the actually working version.
+
+ langpacks.py | 105 +++++++++++++++++++++++++++++++++++++++++------------------
+ 1 file changed, 74 insertions(+), 31 deletions(-)
+
+commit 8d3515006a1acdb5e9af87606deff56a48b67f76
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Fri Jan 28 17:26:22 2011 -0500
+
+    If we're doing groupremove of langsupport groups, clean out anything that matches.
+
+ langpacks.py | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+commit 5fc1cfb8d21d7beb1da8881cd327aabe9acce4fc
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Fri Jan 28 17:26:07 2011 -0500
+
+    If we're doing groupinstalls of langsupport groups, add those languages to our list.
+
+ langpacks.py | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 3b4754519a0a6d7e696372c61c4575b0c0ea892e
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Fri Jan 28 17:25:08 2011 -0500
+
+    Use LANGUAGE as a key for what languages to install (as it supports lists.)
+
+ langpacks.py | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 24617e9fd5652b70621782f68c2603f3180a4bdb
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Fri Jan 28 17:01:55 2011 -0500
+
+    Read conditional packages from metadata instead of using a hardcoded list.
+
+ langpacks.py | 44 +++++++++++++++++++++++---------------------
+ 1 file changed, 23 insertions(+), 21 deletions(-)
+
+commit 62fb0af479b9f3d4338d994753cbdbc3effd6bdf
+Author: Bill Nottingham <notting@redhat.com>
+Date:   Fri Jan 28 17:01:42 2011 -0500
+
+    Set 'en' as a default language if none is set.
+
+ langpacks.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit e039ad65c92e899279f8d54512b4e8a97f620b28
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Wed Feb 2 14:29:31 2011 +1000
+
+    Fix the problems where langpacks could delete the system (RHBZ#585424)
+    
+    (patch from James Antill)
+    
+    - Register the package name, for yum history, etc
+
+ langpacks.py | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+commit 6394e706b62836e55ac2a3b922b93ed6a0b275e4
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Wed Feb 2 14:26:29 2011 +1000
+
+    version 0.1.5
+
+ langpacks.py | 42 ++++++++++++++++++++----------------------
+ setup.py     |  2 +-
+ 2 files changed, 21 insertions(+), 23 deletions(-)
+
+commit 0cc9678b56377d326bb10e2c8284fc1d9a293f4b
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Wed Feb 2 14:23:16 2011 +1000
+
+    add ChangeLog for 0.1.4
+
+ ChangeLog | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+commit 90eb9c010d959e5e713f6d796fb1f7fcfd7620d1
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Wed Feb 2 14:21:59 2011 +1000
+
+    version 0.1.4
+
+ Makefile     | 4 ++--
+ langpacks.py | 6 +++---
+ setup.py     | 2 +-
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+commit 8cab25d2562c711709e5b12e54452156372c0f58
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Wed Feb 2 14:16:16 2011 +1000
+
+    version 0.1.3
+
+ Makefile |  2 +-
+ README   | 23 ++++++++---------------
+ setup.py |  2 +-
+ 3 files changed, 10 insertions(+), 17 deletions(-)
+
+commit b35ce27a4bc47b0b2c5d1e02ed485ba4aa4c2415
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Wed Feb 2 14:14:27 2011 +1000
+
+    version 0.1.2
+
+ Makefile       |  4 ++--
+ langpacks.conf |  3 +++
+ langpacks.py   | 26 +++++++++-----------------
+ setup.py       |  4 ++--
+ 4 files changed, 16 insertions(+), 21 deletions(-)
+
+commit c685c580107a6bf7fc8f39235589b7a45da5c1bd
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Wed Feb 2 14:12:05 2011 +1000
+
+    version 0.1.1
+
+ Makefile | 11 +++++++----
+ setup.py | 14 +++++++-------
+ 2 files changed, 14 insertions(+), 11 deletions(-)
+
+commit a6fd6f2751773633d27b78eb11150f4db996fc35
+Author: Jens Petersen <petersen@redhat.com>
+Date:   Wed Feb 2 11:30:11 2011 +1000
+
+    version 0.1
+
+ COPYING        | 341 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Makefile       |   9 ++
+ README         |  23 ++++
+ langpacks.conf |   2 +
+ langpacks.py   | 110 +++++++++++++++++++
+ setup.py       |  23 ++++
+ 6 files changed, 508 insertions(+)

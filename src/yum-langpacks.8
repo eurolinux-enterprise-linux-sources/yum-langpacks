@@ -1,0 +1,62 @@
+.\" yum-langpacks - Plugin for yum
+.TH "yum-langpacks" "8" ""  "Parag Nemade" ""
+.SH "NAME"
+yum-langpacks \- Plugin for yum 
+.SH "SYNOPSIS"
+\fByum\fP [command] [package ...]
+.SH "DESCRIPTION"
+.PP 
+\fByum-langpacks\fP is a plugin for yum to install language packs. This plugin
+allows user various commands. 
+.PP 
+\fIcommand\fP is one of:
+.br 
+.I \fR * langavailable  [language1] [language2] [\&.\&.\&.]
+.br
+.I \fR * langinfo       [language1] [language2] [\&.\&.\&.]
+.br
+.I \fR * langinstall    [language1] [language2] [\&.\&.\&.]
+.br
+.I \fR * langlist       [language1] [language2] [\&.\&.\&.]
+.br
+.I \fR * langremove     [language1] [language2] [\&.\&.\&.]
+.br
+.PP 
+
+.IP "\fBlangavailable\fP"
+This command allows user to find if language support is available for the given input languages.
+
+.IP
+.IP "\fBlanginfo\fP"
+This command allows user to check which packages will get installed when the given input language support is installed.
+
+.IP
+.IP "\fBlanginstall\fP"
+This command allows user to install language packs for the given input languages.
+
+.IP
+.IP "\fBlanglist\fP"
+This command prints list of the installed languages.
+
+.IP
+.IP "\fBlangremove\fP"
+This command allows user to remove the installed language packs for a given input languages.
+
+.SH "EXAMPLES"
+.PP
+   \fBTo check what packages get installed for language codes es_ES, hi_IN and language names Japanese and Portuguese (Brazil).\fP
+   yum langinfo es_ES "Japanese" hi_IN "Portuguese (Brazil)"
+
+.SH "NOTES"
+   These commands accept language codes or language names or mix of them as a input.
+
+.PP
+.SH "SEE ALSO"
+.nf
+.I yum (8)
+.fi
+
+.PP
+.SH "BUGS"
+Please report any bugs in Red Hat bugzilla, https://bugzilla.redhat.com/enter_bug.cgi?product=Fedora
+.fi

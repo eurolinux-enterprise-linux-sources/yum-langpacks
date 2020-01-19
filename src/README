@@ -1,0 +1,29 @@
+
+=== yum-langpacks ===
+
+This plugin add support for automatic and manual installation of langpacks.
+
+=== How it works ===
+
+yum group metadata specifies which packages have language packs. This plugin
+reads that metadata, and for any configured or currently running language,
+installs those language packs for any packages that are being installed (and
+removes them if that package is being removed.)
+
+=== Additional commands ===
+
+If you'd like to add support for a language post-install, then you can run:
+	yum langinstall [language] [another language] ...
+to install any relevant language packs for that language.
+
+To remove installed language packs, run:
+	yum langremove [language] [another language] ...
+
+To list what language packs are already installed on your system, run:
+	yum langlist
+
+To list the packages available for any language packs, run:
+        yum langinfo [language] [another language] ...
+
+To check if the language pack is available for any language, run:
+        yum langavailable [language] [another language] ...
