@@ -1,12 +1,13 @@
 Summary:       Langpacks plugin for yum
 Name:          yum-langpacks
 Version:       0.4.2
-Release:       3%{?dist}
+Release:       4%{?dist}
 License:       GPLv2+
 Group:         Development/Tools
 Source0:       https://fedorahosted.org/releases/y/u/%{name}/%{name}-%{version}.tar.gz
 # upstream commited patches
 Patch0:        yum-langpacks-0.4.2-fix-langinfo-command.patch
+Patch1:        yum-langpacks-0.4.2-fix-zh_CN-locale-packages.patch
 
 URL:           https://fedorahosted.org/yum-langpacks/
 BuildArch:     noarch
@@ -22,6 +23,7 @@ language for packages you install.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 
@@ -39,6 +41,13 @@ install -p -m 644 yum-langpacks.8.gz %{buildroot}%{_mandir}/man8/yum-langpacks.8
 %{_mandir}/man8/yum-langpacks.8.gz
 
 %changelog
+* Tue Jun 23 2015 Scientific Linux Auto Patch Process <SCIENTIFIC-LINUX-DEVEL@LISTSERV.FNAL.GOV>
+- Eliminated rpmbuild "bogus date" error due to inconsistent weekday,
+  by assuming the date is correct and changing the weekday.
+
+* Wed Jun 03 2015 Parag Nemade <pnemade AT redhat DOT com> - 0.4.2-4
+- Resolves:rh#1165731: man-pages-zh-CN is not installed for zh_CN
+
 * Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.4.2-3
 - Mass rebuild 2013-12-27
 
