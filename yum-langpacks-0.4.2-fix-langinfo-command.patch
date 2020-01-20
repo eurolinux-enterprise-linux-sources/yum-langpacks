@@ -1,0 +1,101 @@
+diff -urN yum-langpacks-0.4.2.old/langpacks.py yum-langpacks-0.4.2/langpacks.py
+--- yum-langpacks-0.4.2.old/langpacks.py	2013-10-08 14:22:25.000000000 +0530
++++ yum-langpacks-0.4.2/langpacks.py	2013-11-15 14:13:33.966937576 +0530
+@@ -56,7 +56,7 @@
+ 
+ langs = []
+ langinstalled = []
+-
++whitelisted_locales = ['en_AU', 'en_CA', 'en_GB', 'pt_BR', 'pt_PT', 'zh_CN', 'zh_TW']
+ conditional_pkgs = {}
+ 
+ def _setup_conditional_pkgs(repos):
+@@ -127,7 +127,7 @@
+ 		      if lname not in skip_pkg_list:
+ 		           langlist.append(lname)
+ 
+-    return langlist
++    return (seen, langlist)
+ 
+ def lc_to_langname(lc):
+     return langtable.language_name(languageId=lc, languageIdQuery="en").encode("UTF-8")
+@@ -297,6 +297,35 @@
+           uniq_list.append(wover)
+    return sorted(uniq_list)
+ 
++def get_matches_from_repo(langpack_pkgs, lang):
++    avl_langpack_pkgs = []
++    #Check if lang is empty, case like input mara, marat
++    if len(lang) == 0:
++        return avl_langpack_pkgs
++    lname = lc_to_langname(lang)
++    lang = "-" + lang
++    for pkgs in langpack_pkgs:
++        if len(lang) < 5 and lang.find("_") == -1:
++            if pkgs.find(lang, len(pkgs)-len(lang), len(pkgs)) > 0 :
++                avl_langpack_pkgs.append(pkgs)
++            if lname:
++                if pkgs.find(lname, len(pkgs)-len(lname), len(pkgs)) > 0 :
++                    avl_langpack_pkgs.append(pkgs)
++        if len(lang) > 4 and lang.find("_") != -1:
++            mainlang = lang[0:lang.find("_")]
++            if pkgs.find(lang, len(pkgs)-len(lang), len(pkgs)) > 0 :
++                avl_langpack_pkgs.append(pkgs)
++           # if input pt_BR then show for pt and pt_BR
++            # if input zh_CN then show for zh and zh_CN
++            elif pkgs.find(mainlang, len(pkgs)-len(mainlang), len(pkgs)) > 0 :
++                avl_langpack_pkgs.append(pkgs)
++
++            if lname:
++                if pkgs.find(lname, len(pkgs)-len(lname), len(pkgs)) > 0 :
++                    avl_langpack_pkgs.append(pkgs)
++
++    return sorted(avl_langpack_pkgs)
++
+ def get_matches_from_ts(lang, base = None):
+     yb = base
+     sack = base.pkgSack
+@@ -574,13 +603,27 @@
+     def doCommand(self, base, basecmd, extcmds):
+         base.repos.doSetup()
+         _setup_conditional_pkgs(base.repos.listEnabled())
++        (langpack_pkgs, ra_list) = read_available_langpacks(base)
++
+         for lang in extcmds:
+-	    print "Language-Id={0}".format(lang)
+-	    if len(lang) > 3 and lang.find("_") == -1:
+-                list_pkgs = get_matches_from_ts(langname_to_lc(lang), base)
++            print "Language-Id={0}".format(lang)
++            if len(lang) == 1:
++                print "Not a valid input"
++                return 0, [""]
++            # Case to handle input like zh_CN, pt_BR
++            elif lang in whitelisted_locales and len(lang) > 3 and lang.find("_") != -1:
++                list_pkgs = get_matches_from_repo(langpack_pkgs, lang)
++            # Case for full language name input like Japanese
++            elif len(lang) > 3 and lang.find("_") == -1:
++                list_pkgs = get_matches_from_repo(langpack_pkgs, langname_to_lc(lang))
++            # General case to handle input like ja, ru, fr, it
+             else:
+-	        list_pkgs = get_matches_from_ts(lang, base)
+-	    for pkg in set(list_pkgs):
++                if lang.find("_") == -1:
++                     list_pkgs = get_matches_from_repo(langpack_pkgs, lang)
++                # Case to not process mr_IN or mai_IN locales
++                else:
++                     list_pkgs = []
++            for pkg in list_pkgs:
+ 		print "  " + pkg
+ 	    if len(list_pkgs) == 0:
+                  print "No langpacks to show for languages: {0}".format(lang)
+@@ -603,8 +646,8 @@
+         base.repos.doSetup()
+         _setup_conditional_pkgs(base.repos.listEnabled())
+ 
+-        list = read_available_langpacks(base)
+-        langlist = get_unique_language_names(list)
++        (language_packs, ra_list) = read_available_langpacks(base)
++        langlist = get_unique_language_names(ra_list)
+ 
+         if not extcmds:
+             print "Displaying all available language:-"

@@ -1,10 +1,13 @@
 Summary:       Langpacks plugin for yum
 Name:          yum-langpacks
 Version:       0.4.2
-Release:       1%{?dist}
+Release:       3%{?dist}
 License:       GPLv2+
 Group:         Development/Tools
 Source0:       https://fedorahosted.org/releases/y/u/%{name}/%{name}-%{version}.tar.gz
+# upstream commited patches
+Patch0:        yum-langpacks-0.4.2-fix-langinfo-command.patch
+
 URL:           https://fedorahosted.org/yum-langpacks/
 BuildArch:     noarch
 BuildRequires: python-setuptools
@@ -18,6 +21,7 @@ language for packages you install.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 
@@ -35,6 +39,12 @@ install -p -m 644 yum-langpacks.8.gz %{buildroot}%{_mandir}/man8/yum-langpacks.8
 %{_mandir}/man8/yum-langpacks.8.gz
 
 %changelog
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.4.2-3
+- Mass rebuild 2013-12-27
+
+* Wed Nov 20 2013 Parag Nemade <pnemade AT redhat DOT com> - 0.4.2-2
+- Resolves:rh#1029789: yum langinfo only lists langpacks for installed packages
+
 * Tue Oct 08 2013 Parag Nemade <pnemade AT redhat DOT com> - 0.4.2-1
 - Resolves:rh#1013514: Some more optimization for yum langavailable shows nothing
 
