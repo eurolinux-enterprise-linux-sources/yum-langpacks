@@ -1,0 +1,30 @@
+From 1a9dbf3127391086dad5e05d016e8dcdc0a55999 Mon Sep 17 00:00:00 2001
+From: Parag Nemade <pnemade@redhat.com>
+Date: Fri, 22 Apr 2016 19:44:03 +0530
+Subject: [PATCH] Resolves:rh#1251388 - Add parser for libreoffice langpacks
+
+---
+ langpacks.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/langpacks.py b/langpacks.py
+index 9b235b7..9680953 100644
+--- a/langpacks.py
++++ b/langpacks.py
+@@ -637,10 +637,13 @@ class LanginfoCommand:
+                 # check RHEL7 release notes package
+                 if lang.find("pt_BR") != -1:
+                    relnotpkg = "Red_Hat_Enterprise_Linux-Release_Notes-7-" + "pt-BR"
++                   list_pkgs.append("libreoffice-langpack-pt-BR")
+                 if lang.find("zh_CN") != -1:
+                    relnotpkg = "Red_Hat_Enterprise_Linux-Release_Notes-7-" + "zh-CN"
++                   list_pkgs.append("libreoffice-langpack-zh-Hans")
+                 if lang.find("zh_TW") != -1:
+                    relnotpkg = "Red_Hat_Enterprise_Linux-Release_Notes-7-" + "zh-TW"
++                   list_pkgs.append("libreoffice-langpack-zh-Hant")
+                 for pkg in langpack_pkgs:
+                     if pkg.find(relnotpkg) != -1:
+                        list_pkgs.append(pkg)
+-- 
+1.8.3.1
+

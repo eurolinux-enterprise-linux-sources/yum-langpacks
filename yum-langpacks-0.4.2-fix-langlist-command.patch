@@ -1,0 +1,22 @@
+diff -urN yum-langpacks-0.4.2/langpacks.py yum-langpacks-0.4.2.new/langpacks.py
+--- yum-langpacks-0.4.2/langpacks.py	2015-02-24 14:15:49.684389233 +0530
++++ yum-langpacks-0.4.2.new/langpacks.py	2015-02-24 14:17:09.517381490 +0530
+@@ -595,10 +595,14 @@
+ 
+     def doCommand(self, base, basecmd, extcmds):
+         list = read_installed_langpacks()
+-        print "Installed languages:"
+-        for item in list:
+-            if not item.startswith("#"):
+-                print "\t" + lc_to_langname(item)
++        if list:
++           print "Installed languages:"
++           for item in list:
++               if not item.startswith("#"):
++                   print "\t" + lc_to_langname(item)
++        else:
++            print("No langpacks installed")
++
+         return 0, [""]
+ 
+ class LanginfoCommand:

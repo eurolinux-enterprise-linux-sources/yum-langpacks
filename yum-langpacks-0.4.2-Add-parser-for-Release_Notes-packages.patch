@@ -1,0 +1,82 @@
+From f86e94c305e2a82fc66eab0bdae18ae8e063304d Mon Sep 17 00:00:00 2001
+From: Parag Nemade <pnemade@redhat.com>
+Date: Fri, 22 Apr 2016 19:42:39 +0530
+Subject: [PATCH] Resolves:rh#1263241 - Add parser for Release_Notes packages
+
+---
+ langpacks.py | 38 ++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 36 insertions(+), 2 deletions(-)
+
+diff --git a/langpacks.py b/langpacks.py
+index 2e162a0..9b235b7 100644
+--- a/langpacks.py
++++ b/langpacks.py
+@@ -94,7 +94,10 @@ def read_available_langpacks (base = None):
+     yb = base
+ 
+     srchpkglist = []
+-    skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides', 'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ']
++    skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides',
++                         'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ',
++                         'mysql', 'common', 'examples', 'ibase', 'odbc',
++                         'postgresql', 'static']
+     langlist = []
+     seen = set()
+ 
+@@ -316,7 +319,11 @@ def get_matches_from_repo(langpack_pkgs, lang):
+             if lang.find("_") != -1:
+                mainlang = lang[0:lang.find("_")]
+                if lang.find("_CN") != -1 and pkgs.find("-CN") != -1:
+-                   avl_langpack_pkgs.append(pkgs)
++                   # this check to ensure Release_notes package 
++                   # not listed twice for langinfo of zh_CN
++                   # only show man-pages-zh-CN
++                   if pkgs.find("man-pages") != -1:
++                      avl_langpack_pkgs.append(pkgs)
+                if pkgs.find(lang, len(pkgs)-len(lang), len(pkgs)) > 0:
+                    avl_langpack_pkgs.append(pkgs)
+                # if input pt_BR then show for pt and pt_BR
+@@ -627,13 +634,40 @@ class LanginfoCommand:
+             # Case to handle input like zh_CN, pt_BR
+             elif lang in whitelisted_locales and len(lang) > 3 and lang.find("_") != -1:
+                 list_pkgs = get_matches_from_repo(langpack_pkgs, lang)
++                # check RHEL7 release notes package
++                if lang.find("pt_BR") != -1:
++                   relnotpkg = "Red_Hat_Enterprise_Linux-Release_Notes-7-" + "pt-BR"
++                if lang.find("zh_CN") != -1:
++                   relnotpkg = "Red_Hat_Enterprise_Linux-Release_Notes-7-" + "zh-CN"
++                if lang.find("zh_TW") != -1:
++                   relnotpkg = "Red_Hat_Enterprise_Linux-Release_Notes-7-" + "zh-TW"
++                for pkg in langpack_pkgs:
++                    if pkg.find(relnotpkg) != -1:
++                       list_pkgs.append(pkg)
++                       break
+             # Case for full language name input like Japanese
+             elif len(lang) > 3 and lang.find("_") == -1:
++                if len(langname_to_lc(lang)) == 0:
++                   print "Not a valid language name"
++                   return 0, [""]
++
+                 list_pkgs = get_matches_from_repo(langpack_pkgs, langname_to_lc(lang))
++                # check RHEL7 release notes package
++                relnotpkg = "Red_Hat_Enterprise_Linux-Release_Notes-7-" + langname_to_lc(lang)
++                for pkg in langpack_pkgs:
++                    if pkg.find(relnotpkg) != -1:
++                       list_pkgs.append(pkg)
++                       break
+             # General case to handle input like ja, ru, fr, it
+             else:
+                 if lang.find("_") == -1:
+                      list_pkgs = get_matches_from_repo(langpack_pkgs, lang)
++                     # check RHEL7 release notes package
++                     relnotpkg = "Red_Hat_Enterprise_Linux-Release_Notes-7-" + lang
++                     for pkg in langpack_pkgs:
++                         if pkg.find(relnotpkg) != -1:
++                            list_pkgs.append(pkg)
++                            break
+                 # Case to not process mr_IN or mai_IN locales
+                 else:
+                      list_pkgs = []
+-- 
+1.8.3.1
+

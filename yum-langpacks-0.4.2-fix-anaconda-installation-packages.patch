@@ -1,0 +1,90 @@
+diff --git a/langpacks.py b/langpacks.py
+index e1225c6..b6578cd 100644
+--- a/langpacks.py
++++ b/langpacks.py
+@@ -364,24 +364,67 @@ def add_deps_to_ts(conduit, po):
+     sack = conduit.getRepos().getPackageSack()
+     yb = conduit._base
+     for lang in langs:
+-        pkgs = get_matches(sack, list = map(lambda x: x % (lang,), conds))
+-        if not pkgs and lang != '*':
+-            shortlang = lang.split('_')[0]
+-            pkgs = get_matches(sack, list = map(lambda x: x % (shortlang,), conds))
+-        for pkg in pkgs:
+-            if yb.rpmdb.searchNevra(name=pkg.name):
+-                continue
+-            if yb.tsInfo.matchNaevr(name=pkg.name):
+-                continue
+-            if hasattr(conduit, 'registerPackageName'):
+-                conduit.registerPackageName("yum-langpacks")
+-            try:
+-                yb.install(pattern=pkg.name)
+-                if lang not in langinstalled:
+-                    langinstalled.append(lang)
+-            except yum.Errors.YumBaseError:
+-                conduit.info(5,"Failed to install package %s" % (pkg.name,))
+-                continue
++        lang = lang[:-6]
++        if lang.find("zh_CN") != -1 and po.name.find("man-pages") != -1:
++           try:
++              yb.install(pattern="man-pages-zh-CN")
++              if lang not in langinstalled:
++                  langinstalled.append(lang)
++           except yum.Errors.YumBaseError:
++              conduit.info(5,"Failed to install package man-pages-zh-CN")
++              continue
++        if lang.find("zh_CN") != -1 and po.name.find("libreoffice-core") != -1:
++           try:
++              yb.install(pattern="libreoffice-langpack-zh-Hans")
++              if lang not in langinstalled:
++                  langinstalled.append(lang)
++           except yum.Errors.YumBaseError:
++              conduit.info(5,"Failed to install package libreoffice-langpack-zh-Hans")
++              continue
++        # This is strange case where pt_BR works but not zh_CN, hardcode this
++        if lang.find("zh_CN") != -1 and po.name.find("gimp-help") != -1:
++           try:
++              yb.install(pattern="gimp-help-zh_CN")
++              if lang not in langinstalled:
++                  langinstalled.append(lang)
++           except yum.Errors.YumBaseError:
++              conduit.info(5,"Failed to install package gimp-help-zh_CN")
++              continue
++        if lang.find("zh_TW") != -1 and po.name.find("libreoffice-core") != -1:
++           try:
++              yb.install(pattern="libreoffice-langpack-zh-Hant")
++              if lang not in langinstalled:
++                  langinstalled.append(lang)
++           except yum.Errors.YumBaseError:
++              conduit.info(5,"Failed to install package libreoffice-langpack-zh-Hant")
++              continue
++        if lang.find("pt_BR") != -1 and po.name.find("libreoffice-core") != -1:
++           try:
++              yb.install(pattern="libreoffice-langpack-pt-BR")
++              if lang not in langinstalled:
++                  langinstalled.append(lang)
++           except yum.Errors.YumBaseError:
++              conduit.info(5,"Failed to install package libreoffice-langpack-zh-Hant")
++              continue
++        else: 
++            pkgs = get_matches(sack, list = map(lambda x: x % (lang,), conds))
++            if not pkgs and lang != '*':
++                shortlang = lang.split('_')[0]
++                pkgs = get_matches(sack, list = map(lambda x: x % (shortlang,), conds))
++            for pkg in pkgs:
++                if yb.rpmdb.searchNevra(name=pkg.name):
++                    continue
++                if yb.tsInfo.matchNaevr(name=pkg.name):
++                    continue
++                if hasattr(conduit, 'registerPackageName'):
++                    conduit.registerPackageName("yum-langpacks")
++                try:
++                   yb.install(pattern=pkg.name)
++                   if lang not in langinstalled:
++                      langinstalled.append(lang)
++                except yum.Errors.YumBaseError:
++                    conduit.info(5,"Failed to install package %s" % (pkg.name,))
++                    continue
+ 
+ def remove_deps_from_ts(conduit, po):
+     conds = conditional_pkgs[po.name]
